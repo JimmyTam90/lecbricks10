@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+html { scroll-behavior: smooth; }
+body { background: #1a202c; color: #e2e8f0; overflow-x: hidden; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+
+/* Brick-stud motif: the one distinctive visual device on the page */
+.stud-bg {
+  background-color: #1a202c;
+  background-image: radial-gradient(circle at 50% 50%, #2d3748 38%, transparent 40%);
+  background-size: 28px 28px;
+}
