@@ -2,9 +2,10 @@
 import { useState } from "react";
 
 // Plain <img> with a graceful fallback. Never swaps in a different product's image.
-export default function SafeImage({ src, alt, className = "", fit = "cover", priority = false }) {
+export default function SafeImage({ src, alt, className = "", fit = "cover", priority = false, width = 800, height = 600, style, hideOnError = false }) {
   const [failed, setFailed] = useState(false);
   if (!src || failed) {
+    if (hideOnError) return null;
     return (
       <div role="img" aria-label={`${alt} (image unavailable)`} className={`stud-bg flex items-center justify-center text-sm text-slate-400 ${className}`}>
         Image unavailable
@@ -16,8 +17,9 @@ export default function SafeImage({ src, alt, className = "", fit = "cover", pri
     <img
       src={src}
       alt={alt}
-      width={800}
-      height={600}
+      width={width}
+      height={height}
+      style={style}
       loading={priority ? "eager" : "lazy"}
       decoding="async"
       referrerPolicy="no-referrer-when-downgrade"

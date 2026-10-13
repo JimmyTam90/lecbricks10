@@ -1,17 +1,17 @@
 # letbricks: PrimeGearLab affiliate landing page (Next.js 14.2.35, JavaScript)
 
-Hub–Spoke Proxy: public `https://primegearlab.com/letbricks` -> Spoke `https://letbricks10.vercel.app`.
+Hub–Spoke Proxy: public `https://primegearlab.com/letbricks` -> Spoke (Vercel project `lecbricks10`; verify host in Vercel Domains).
 
 ## Setup
 1. Put your logo at `public/logo.png` (public URL: `/letbricks/logo.png`).
 2. `cp .env.example .env.local`, then `npm install`, `npm run validate`, `npm run lint`, `npm run build`.
-3. Vercel (Spoke project): set `SPOKE_PROJECT_URL=https://letbricks10.vercel.app` for **Build**. Optional: `NEXT_PUBLIC_GA4_ID`, `NEXT_PUBLIC_GOOGLE_ADS_ID`, `NEXT_PUBLIC_META_PIXEL_ID`.
+3. Vercel (Spoke project): `SPOKE_PROJECT_URL` is optional; if unset, the build uses `VERCEL_PROJECT_PRODUCTION_URL`. If you set it, use the REAL host (the project is named `lecbricks10`, so likely `https://lecbricks10.vercel.app`). Check the build log line `[next.config] assetPrefix = ...`. Optional: `NEXT_PUBLIC_GA4_ID`, `NEXT_PUBLIC_GOOGLE_ADS_ID`, `NEXT_PUBLIC_META_PIXEL_ID`.
 
 ## Hub rewrite (assumed; compare with your real Hub `vercel.json`)
 ```json
 { "rewrites": [
-  { "source": "/letbricks", "destination": "https://letbricks10.vercel.app" },
-  { "source": "/letbricks/:path*", "destination": "https://letbricks10.vercel.app/:path*" }
+  { "source": "/letbricks", "destination": "https://<your-spoke-host>.vercel.app" },
+  { "source": "/letbricks/:path*", "destination": "https://<your-spoke-host>.vercel.app/:path*" }
 ] }
 ```
 Config choices: no `basePath`; `assetPrefix` = Spoke origin (production only); `trailingSlash: false`;
